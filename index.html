@@ -13,15 +13,23 @@
     
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="dark-mode">
+    <div class="bg-layers">
+        <div class="bg-base"></div>
+        <div class="bg-waves"></div>
+    </div>
     <header id="main-header">
         <div class="container nav">
-            <a href="#" class="logo">ABREU PRO RAP</a>
+            <a href="#" class="logo">
+                <img src="logo-light.svg" alt="Abreu pro Rap" class="logo-light">
+                <img src="logo-dark.svg" alt="Abreu pro Rap" class="logo-dark">
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">O Festival</a></li>
                 <li><a href="#lineup">Lineup</a></li>
                 <li><a href="#gallery">Galeria</a></li>
                 <li><a href="#contact">Contato</a></li>
+                <li><button id="theme-toggle" style="background: var(--primary-color); border: none; padding: 5px 10px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.7rem;">TROCAR MODO</button></li>
             </ul>
         </div>
     </header>
@@ -76,6 +84,18 @@
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
+            }
+        });
+
+        // Theme Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.replace('dark-mode', 'light-mode');
+            } else {
+                body.classList.replace('light-mode', 'dark-mode');
             }
         });
     </script>
