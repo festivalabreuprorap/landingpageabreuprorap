@@ -1,12 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>#APR26 | Festival Abreu pro Rap</title>
+    <meta name="description" content="A maior celebração da cultura urbana em 2026. Abreu pro Rap, o festival que define uma geração.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <h1>Festival Abreu pro Rap</h1> 
-   <p>Aguardem...</p>
+    <header id="main-header">
+        <div class="container nav">
+            <a href="#" class="logo">ABREU PRO RAP</a>
+            <ul class="nav-links">
+                <li><a href="#about">O Festival</a></li>
+                <li><a href="#lineup">Lineup</a></li>
+                <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <p>#APR2026</p>
+                <h1 class="glitch-text">O FLOW DA<br>PROVEITO</h1>
+                <a href="#tickets" class="btn">Em Breve</a>
+            </div>
+        </section>
+
+        <section id="about" class="container">
+            <h2 style="font-size: 3rem; margin-bottom: 20px;">A Revolução Urbana</h2>
+            <p style="font-size: 1.2rem; max-width: 800px; color: #ccc;">
+                O Festival Abreu pro Rap chega em sua edição de 2026 para consolidar o movimento. Mais do que música, somos a voz da rua, a batida do asfalto e a rima que transforma realidades. Prepare-se para uma experiência imersiva no coração da cultura hip-hop.
+            </p>
+        </section>
+
+        <!-- Placeholder sections to be expanded -->
+        <section id="lineup" style="background-color: #111;">
+            <div class="container">
+                <h2 style="font-size: 3rem; margin-bottom: 40px; text-align: center;">Lineup em Construção</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="height: 300px; background: #1a1a1a; border: 1px dashed #333; display: flex; align-items: center; justify-content: center;">SURPRESA</div>
+                    <div style="height: 300px; background: #1a1a1a; border: 1px dashed #333; display: flex; align-items: center; justify-content: center;">SURPRESA</div>
+                    <div style="height: 300px; background: #1a1a1a; border: 1px dashed #333; display: flex; align-items: center; justify-content: center;">SURPRESA</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" style="background: #000; padding: 60px 0; border-top: 1px solid var(--glass);">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+            <h2 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;">#APR26</h2>
+            <p style="margin-bottom: 30px;">Abreu e Lima, Pernambuco - Brasil</p>
+            <div style="display: flex; gap: 20px; font-size: 1.5rem;">
+                <!-- Social Icons Placeholders -->
+                <a href="#" style="color: white; text-decoration: none;">IG</a>
+                <a href="#" style="color: white; text-decoration: none;">YT</a>
+                <a href="#" style="color: white; text-decoration: none;">TT</a>
+            </div>
+            <p style="margin-top: 40px; font-size: 0.8rem; color: #555;">&copy; 2026 Festival Abreu pro Rap. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>
