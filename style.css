@@ -285,7 +285,12 @@ h1, h2, h3 {
 .light-mode .mvv-bg {
     opacity: 0.6;
 }
-
+@media (max-width: 768px) {
+    .mvv-grid {
+        grid-template-columns: 1fr;
+        gap: 60px;
+    }
+    
     .partnership-logos {
         flex-direction: column;
         gap: 30px;
