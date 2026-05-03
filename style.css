@@ -286,10 +286,14 @@ h1, h2, h3 {
     opacity: 0.6;
 }
 
-@media (max-width: 768px) {
-    .mvv-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
+    .partnership-logos {
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .partnership img {
+        height: 70px; /* Leve redução para mobile */
     }
 }
 
@@ -383,6 +387,7 @@ h1, h2, h3 {
 
 .partnership-logos {
     display: flex;
+    flex-direction: row; /* Lado a lado no desktop */
     gap: 40px;
     align-items: center;
     margin-top: 5px;
@@ -542,11 +547,31 @@ header.scrolled {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero-content h1 {
+    .nav {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .logo img {
+        height: 100px;
+    }
+
+    .nav-links {
+        display: none; /* Menu oculto no mobile por enquanto */
+    }
+
+    .hero h1 {
         font-size: 3.5rem;
     }
-    .nav-links {
-        display: none;
+
+    .partnership-logos {
+        flex-direction: column;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .partnership img {
+        height: 70px;
     }
 }
 
