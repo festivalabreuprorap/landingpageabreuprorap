@@ -77,6 +77,7 @@
             </a>
             <ul class="nav-links">
                 <li><a href="#about">O FESTIVAL</a></li>
+                <li><a href="#impact">IMPACTO</a></li>
                 <li><a href="#lineup">LINEUP</a></li>
                 <li><a href="#crew">CREW</a></li>
                 <li><a href="#contact">CONTATO</a></li>
@@ -88,7 +89,7 @@
     <main>
         <section class="hero">
             <div class="hero-content">
-                <span class="tag">#APR2026</span>
+                <span class="tag">Inova&ccedil;&atilde;o e cultura perif&eacute;rica que conecta arte, juventude e transforma&ccedil;&atilde;o social.</span>
                 <h1 class="glitch-text" data-text="CULTURA HIP HOP">CULTURA<br>HIP HOP</h1>
                 <a href="#lineup" class="cta-button">EM BREVE</a>
             </div>
@@ -166,6 +167,87 @@
                     <a href="https://chat.whatsapp.com/G2G20fRTOOR9q37IaYlr3N?mode=gi_t" target="_blank" class="wpp-btn-container">
                         <img src="tag-grupo-wpp.svg" alt="Grupo WhatsApp #APR26" class="wpp-dynamic-tag">
                     </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact" class="impact-section">
+            <div class="container">
+                <h2 class="section-title">IMPACTO</h2>
+                
+                <!-- Main Timeline View -->
+                <div id="timeline-main" class="timeline-container">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-years">
+                        <div class="year-point" onclick="showImpact('2024')">
+                            <span class="year-label">2024</span>
+                            <div class="spray-dot">
+                                <img src="Splater Tag Spray.svg" alt="Tag 2024" class="spray-img">
+                            </div>
+                        </div>
+                        <div class="year-point" onclick="showImpact('2025')">
+                            <span class="year-label">2025</span>
+                            <div class="spray-dot">
+                                <img src="Splater Tag Spray.svg" alt="Tag 2025" class="spray-img">
+                            </div>
+                        </div>
+                        <div class="year-point current" onclick="showImpact('2026')">
+                            <span class="year-label">2026</span>
+                            <div class="spray-dot">
+                                <img src="Splater Tag Spray.svg" alt="Tag 2026" class="spray-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail View (Hidden by default) -->
+                <div id="impact-details" class="impact-details-view" style="display: none;">
+                    <div class="details-header">
+                        <button class="back-btn" onclick="hideImpact()">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="3" fill="none"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                            voltar
+                        </button>
+                        <h2 id="detail-year" class="detail-year-title">2024</h2>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="details-left">
+                            <h3 id="detail-headline" class="detail-headline">O IN&Iacute;CIO DE TUDO</h3>
+                            <div id="detail-text" class="detail-text-content">
+                                <!-- Content will be injected by JS -->
+                            </div>
+                            
+                            <div class="photo-area cover-flow">
+                                <button class="slider-arrow prev-arrow" onclick="rotatePhotos(-1)">&larr;</button>
+                                <div class="photo-display" id="photo-display">
+                                    <!-- Photos injected here -->
+                                </div>
+                                <button class="slider-arrow next-arrow" onclick="rotatePhotos(1)">&rarr;</button>
+                            </div>
+                        </div>
+
+                        <div class="details-right">
+                            <div class="impact-stats">
+                                <div class="stat-item">
+                                    <span class="stat-num" id="stat-artistas">+20 ARTISTAS</span>
+                                    <span class="stat-desc" id="stat-artistas-desc">Impactados</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-num" id="stat-jovens">+30 JOVENS</span>
+                                    <span class="stat-desc" id="stat-jovens-desc">Participantes</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-num" id="stat-edicoes">1 CIDADE</span>
+                                    <span class="stat-desc" id="stat-edicoes-desc">Atendida</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-num" id="stat-pessoas">+300MIL</span>
+                                    <span class="stat-desc" id="stat-pessoas-desc">Pessoas Alcan&ccedil;adas</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -302,8 +384,6 @@
                         <div class="partner-item placeholder">LOGO AQUI</div>
                         <div class="partner-item placeholder">LOGO AQUI</div>
                         <div class="partner-item placeholder">LOGO AQUI</div>
-                        <div class="partner-item placeholder">LOGO AQUI</div>
-                        <div class="partner-item placeholder">LOGO AQUI</div>
                     </div>
                 </div>
             </div>
@@ -352,17 +432,164 @@
             }
         });
 
-        // Theme Toggle Logic
+        // Global Data
+        const impactData = {
+            '2024': {
+                headline: 'O IN&Iacute;CIO DE TUDO',
+                text: 'Nossa primeira edi&ccedil;&atilde;o, onde as ideias tomaram forma e tudo se tornou realidade.<br><br>Um coletivo formado para movimentar o potencial dos jovens perif&eacute;ricos atrav&eacute;s da <span class="highlight">Cultura Hip Hop.</span>',
+                artistas: '+20 ARTISTAS',
+                artistasDesc: 'Impactados',
+                jovens: '+100 JOVENS',
+                jovensDesc: 'Participantes',
+                edicoes: '3 CIDADES',
+                edicoesDesc: 'Atendidas',
+                pessoas: '300 mil',
+                pessoasDesc: 'Pessoas alcan&ccedil;adas',
+                photos: ['2024 foto 1.png', '2024 foto 2.png', '2024 foto 3.png', '2024 foto 4.png']
+            },
+            '2025': {
+                headline: 'EXPANS&Atilde;O E VOZ',
+                text: 'Consolidamos nossa presen&ccedil;a e ampliamos o alcance regional. Novos talentos surgiram com o <span class="highlight"><strong>Mic Aberto</strong></span> e a rede de conex&otilde;es se fortaleceu em todo o estado com o <span class="highlight"><strong>Slam</strong></span> e <span class="highlight"><strong>Batalha de Rima</strong></span>.<br><br>A arte como ferramenta de <span class="highlight">emancipa&ccedil;&atilde;o e pot&ecirc;ncia.</span>',
+                artistas: '30 ARTISTAS',
+                artistasDesc: 'Impactados',
+                jovens: '300 JOVENS',
+                jovensDesc: 'Participantes',
+                edicoes: '5 CIDADES',
+                edicoesDesc: 'Atendidas',
+                pessoas: '500 mil',
+                pessoasDesc: 'Pessoas alcan&ccedil;adas',
+                photos: [] 
+            },
+            '2026': {
+                headline: '#APR2026: O FUTURO',
+                text: 'A terceira edi&ccedil;&atilde;o marca o amadurecimento do projeto. Estamos construindo um legado que conecta inova&ccedil;&atilde;o e ra&iacute;zes urbanas.<br><br>O <span class="highlight">Festival da Revolu&ccedil;&atilde;o Urbana</span> est&aacute; apenas come&ccedil;ando.',
+                artistas: 'Em breve...',
+                artistasDesc: 'Artistas Impactados',
+                jovens: 'Em breve...',
+                jovensDesc: 'Jovens Participantes',
+                edicoes: 'Em breve...',
+                edicoesDesc: 'Cidades Atendidas',
+                pessoas: 'Em breve...',
+                pessoasDesc: 'Pessoas alcan&ccedil;adas',
+                photos: [] 
+            }
+        };
+
+        // Impact Navigation (Cover Flow)
+        let activeIndex = 0;
+        let currentYearPhotos = [];
+
+        function showImpact(year) {
+            const data = impactData[year];
+            if (!data) return;
+
+            document.getElementById('detail-year').textContent = year;
+            document.getElementById('detail-headline').innerHTML = data.headline;
+            document.getElementById('detail-text').innerHTML = data.text;
+            
+            // Stats Numbers
+            document.getElementById('stat-artistas').innerHTML = data.artistas;
+            document.getElementById('stat-jovens').innerHTML = data.jovens;
+            document.getElementById('stat-edicoes').innerHTML = data.edicoes;
+            document.getElementById('stat-pessoas').innerHTML = data.pessoas;
+
+            // Stats Descriptions
+            document.getElementById('stat-artistas-desc').innerHTML = data.artistasDesc;
+            document.getElementById('stat-jovens-desc').innerHTML = data.jovensDesc;
+            document.getElementById('stat-edicoes-desc').innerHTML = data.edicoesDesc;
+            document.getElementById('stat-pessoas-desc').innerHTML = data.pessoasDesc;
+
+            // Update Photo Area
+            const photoDisplay = document.getElementById('photo-display');
+            photoDisplay.innerHTML = '';
+            activeIndex = 0;
+            currentYearPhotos = data.photos || [];
+            
+            if (currentYearPhotos.length > 0) {
+                currentYearPhotos.forEach((photo, index) => {
+                    const img = document.createElement('img');
+                    img.src = photo;
+                    img.className = 'photo-item-img';
+                    img.alt = `Registro ${year}`;
+                    img.dataset.index = index;
+                    photoDisplay.appendChild(img);
+                });
+                updateCoverFlow();
+            } else {
+                photoDisplay.innerHTML = '<div class="photo-item" style="color: #666; font-size: 0.9rem; padding: 20px;">FOTOS EM BREVE</div>';
+            }
+
+            // Hide arrows if only 1 photo
+            const arrows = document.querySelectorAll('.slider-arrow');
+            arrows.forEach(arrow => {
+                arrow.style.display = currentYearPhotos.length > 1 ? 'flex' : 'none';
+            });
+
+            document.getElementById('timeline-main').style.display = 'none';
+            document.getElementById('impact-details').style.display = 'block';
+            document.getElementById('impact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function rotatePhotos(direction) {
+            if (currentYearPhotos.length <= 1) return;
+            
+            activeIndex = (activeIndex + direction + currentYearPhotos.length) % currentYearPhotos.length;
+            updateCoverFlow();
+        }
+
+        function updateCoverFlow() {
+            const items = document.querySelectorAll('.photo-item-img');
+            const total = items.length;
+            if (total === 0) return;
+
+            items.forEach(item => {
+                item.classList.remove('active', 'prev', 'next');
+            });
+
+            const current = items[activeIndex];
+            const prevIndex = (activeIndex - 1 + total) % total;
+            const nextIndex = (activeIndex + 1) % total;
+
+            current.classList.add('active');
+            
+            if (total > 1) {
+                items[prevIndex].classList.add('prev');
+                if (total > 2) {
+                    items[nextIndex].classList.add('next');
+                } else if (prevIndex !== nextIndex) {
+                    // If only 2 photos, don't duplicate class if indices match
+                    items[nextIndex].classList.add('next');
+                }
+            }
+        }
+
+        function hideImpact() {
+            document.getElementById('impact-details').style.display = 'none';
+            document.getElementById('timeline-main').style.display = 'block';
+        }
+
+        // Theme Toggle & Persistence
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
 
-        themeToggle.addEventListener('click', () => {
-            if (body.classList.contains('dark-mode')) {
-                body.classList.replace('dark-mode', 'light-mode');
+        function setTheme(isLight) {
+            if (isLight) {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
             } else {
-                body.classList.replace('light-mode', 'dark-mode');
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
             }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isLight = !body.classList.contains('light-mode');
+            setTheme(isLight);
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
         });
+
+        // Init Theme
+        setTheme(localStorage.getItem('theme') === 'light');
     </script>
 </body>
 </html>
