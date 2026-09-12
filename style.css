@@ -768,7 +768,8 @@ header.scrolled {
     align-items: center;
     justify-content: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    cursor: default;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .partner-item:not(.placeholder):hover {
