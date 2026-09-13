@@ -163,15 +163,22 @@ h1, h2, h3 {
 }
 
 @keyframes glitch {
-    0% { transform: translate(0); text-shadow: -2px 0 var(--primary-color), 2px 0 #ff00ff; }
-    25% { transform: translate(-2px, 2px); }
-    50% { transform: translate(-2px, -2px); text-shadow: 2px 0 var(--primary-color), -2px 0 #ff00ff; }
-    75% { transform: translate(2px, 2px); }
-    100% { transform: translate(0); }
+    0% { transform: translate(0); text-shadow: -3px 0 var(--primary-color), 3px 0 #ff00ff, 0 4px 20px rgba(0, 0, 0, 0.9); }
+    25% { transform: translate(-3px, 2px); text-shadow: 3px 0 var(--primary-color), -3px 0 #ff00ff, 0 4px 20px rgba(0, 0, 0, 0.9); }
+    50% { transform: translate(-2px, -2px); text-shadow: -3px 0 #ff00ff, 3px 0 var(--primary-color), 0 4px 20px rgba(0, 0, 0, 0.9); }
+    75% { transform: translate(3px, 2px); text-shadow: 2px 0 var(--primary-color), -2px 0 #ff00ff, 0 4px 20px rgba(0, 0, 0, 0.9); }
+    100% { transform: translate(0); text-shadow: -3px 0 var(--primary-color), 3px 0 #ff00ff, 0 4px 20px rgba(0, 0, 0, 0.9); }
 }
 
-.glitch-text:hover {
-    animation: glitch 0.3s infinite;
+.glitch-text {
+    cursor: pointer;
+    transition: text-shadow 0.2s ease;
+}
+
+.glitch-text:hover,
+.hero-heading h1.glitch-text:hover,
+.hero-heading h1:hover {
+    animation: glitch 0.25s infinite !important;
 }
 
 /* Base Layout */
