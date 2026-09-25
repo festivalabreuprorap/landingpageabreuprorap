@@ -1519,11 +1519,11 @@ header.scrolled {
 /* SVG Name Tag Overlay */
 .artist-name-overlay {
     position: absolute;
-    bottom: -18px;
+    bottom: -22px;
     left: 50%;
     transform: translateX(-50%);
-    width: 112%;
-    max-width: 260px;
+    width: 118%;
+    max-width: 270px;
     z-index: 5;
     pointer-events: none;
     display: flex;
@@ -1655,8 +1655,8 @@ header.scrolled {
     }
     
     .artist-name-overlay {
-        bottom: -14px;
-        width: 114%;
+        bottom: -16px;
+        width: 120%;
     }
     
     .lineup-principal-grid {
