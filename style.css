@@ -1542,6 +1542,10 @@ header.scrolled {
     transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
+.artist-name-svg.artist-name-yuri {
+    width: 50%;
+}
+
 .artist-card-inner:hover .artist-name-svg {
     transform: scale(1.06);
 }
