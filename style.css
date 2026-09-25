@@ -1417,3 +1417,256 @@ header.scrolled {
         width: 200px;
     }
 }
+
+/* =========================================
+   LINEUP & MIC ABERTO SECTION
+========================================= */
+.lineup-section {
+    position: relative;
+    padding: 90px 20px 110px;
+    z-index: 10;
+    overflow: visible;
+}
+
+.lineup-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Bloco Mic Aberto */
+.mic-aberto-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.mic-aberto-badge-wrap {
+    margin-bottom: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mic-aberto-logo {
+    width: 220px;
+    max-width: 75vw;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.65));
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mic-aberto-logo:hover {
+    transform: scale(1.05) rotate(-1deg);
+}
+
+.mic-aberto-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.mic-aberto-card {
+    position: relative;
+    flex: 1 1 0;
+    max-width: 220px;
+}
+
+.artist-card-inner {
+    position: relative;
+    border-radius: 4px;
+    background: #111111;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+    overflow: visible;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.artist-card-inner:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: rgba(250, 255, 0, 0.5);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.9), 0 0 25px rgba(250, 255, 0, 0.18);
+}
+
+.artist-image-container {
+    width: 100%;
+    aspect-ratio: 721 / 801;
+    overflow: hidden;
+    border-radius: 3px;
+    background: #141414;
+}
+
+.artist-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.artist-card-inner:hover .artist-img {
+    transform: scale(1.06);
+}
+
+/* SVG Name Tag Overlay */
+.artist-name-overlay {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 112%;
+    max-width: 260px;
+    z-index: 5;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+.artist-name-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.95)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9));
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.artist-card-inner:hover .artist-name-svg {
+    transform: scale(1.06);
+}
+
+/* Bloco Lineup Principal */
+.lineup-principal-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lineup-principal-title {
+    font-family: 'CC Phat Boi', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 2.7rem);
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin: 8px 0 32px;
+    text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
+    transition: color var(--transition);
+}
+
+.light-mode .lineup-principal-title {
+    color: var(--text-color);
+    text-shadow: none;
+}
+
+.lineup-principal-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.lineup-slot-card {
+    position: relative;
+    aspect-ratio: 721 / 801;
+    background: #141414;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    overflow: hidden;
+    cursor: default;
+}
+
+.light-mode .lineup-slot-card {
+    background: #e5e5e5;
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.lineup-slot-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(250, 255, 0, 0.45);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.85), 0 0 20px rgba(250, 255, 0, 0.12);
+}
+
+.slot-placeholder-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.12;
+    transition: opacity 0.35s ease;
+}
+
+.lineup-slot-card:hover .slot-placeholder-inner {
+    opacity: 0.45;
+}
+
+.slot-label {
+    font-family: 'CC Phat Boi', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    color: #aaaaaa;
+    text-transform: uppercase;
+}
+
+.light-mode .slot-label {
+    color: #555555;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .lineup-principal-grid {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 600px;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    .lineup-section {
+        padding: 60px 16px 80px;
+    }
+    
+    .mic-aberto-grid {
+        gap: 16px;
+        max-width: 380px;
+    }
+    
+    .mic-aberto-logo {
+        width: 180px;
+    }
+    
+    .artist-name-overlay {
+        bottom: -14px;
+        width: 114%;
+    }
+    
+    .lineup-principal-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 380px;
+        gap: 14px;
+    }
+    
+    .lineup-principal-title {
+        margin: 6px 0 24px;
+    }
+}
+
