@@ -1551,12 +1551,11 @@ header.scrolled {
 }
 
 .lineup-principal-title {
-    font-family: 'CC Phat Boi', sans-serif;
-    font-size: clamp(2rem, 3.8vw, 2.7rem);
-    font-weight: bold;
-    color: #ffffff;
+    font-family: 'Rolinho', sans-serif;
+    font-size: clamp(2rem, 3.8vw, 2.8rem);
+    color: var(--text-color);
     text-align: center;
-    letter-spacing: 0.05em;
+    letter-spacing: 2px;
     text-transform: uppercase;
     margin: 8px 0 32px;
     text-shadow: 0 4px 18px rgba(0, 0, 0, 0.9);
@@ -1564,7 +1563,7 @@ header.scrolled {
 }
 
 .light-mode .lineup-principal-title {
-    color: var(--text-color);
+    color: #000;
     text-shadow: none;
 }
 
