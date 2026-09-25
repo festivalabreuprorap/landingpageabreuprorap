@@ -1478,6 +1478,10 @@ header.scrolled {
     position: relative;
     flex: 1 1 0;
     max-width: 220px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
 }
 
 .artist-card-inner {
@@ -1519,11 +1523,11 @@ header.scrolled {
 /* SVG Name Tag Overlay */
 .artist-name-overlay {
     position: absolute;
-    bottom: -22px;
+    bottom: -16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 118%;
-    max-width: 270px;
+    width: 104%;
+    max-width: 230px;
     z-index: 5;
     pointer-events: none;
     display: flex;
@@ -1654,8 +1658,9 @@ header.scrolled {
     }
     
     .artist-name-overlay {
-        bottom: -16px;
-        width: 120%;
+        bottom: -12px;
+        width: 106%;
+        max-width: 200px;
     }
     
     .lineup-principal-grid {
