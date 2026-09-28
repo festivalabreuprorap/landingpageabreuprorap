@@ -1546,6 +1546,10 @@ header.scrolled {
     width: 50%;
 }
 
+.artist-name-svg.artist-name-acm {
+    width: 75%;
+}
+
 .artist-card-inner:hover .artist-name-svg {
     transform: scale(1.06);
 }
