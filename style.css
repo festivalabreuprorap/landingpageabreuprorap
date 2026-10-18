@@ -1550,6 +1550,10 @@ header.scrolled {
     width: 75%;
 }
 
+.artist-name-svg.artist-name-ricodujanga {
+    width: 82%;
+}
+
 .artist-card-inner:hover .artist-name-svg {
     transform: scale(1.06);
 }
