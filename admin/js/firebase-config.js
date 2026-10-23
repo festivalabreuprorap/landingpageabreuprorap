@@ -12,12 +12,13 @@
 
 // Chaves padrão do projeto (podem ser personalizadas via localStorage ou painel de configurações)
 const DEFAULT_FIREBASE_CONFIG = {
-  apiKey: "AIzaSyFestivalAbreuProRap2026KeyMock",
-  authDomain: "abreuprorap-dashboard.firebaseapp.com",
-  projectId: "abreuprorap-dashboard",
-  storageBucket: "abreuprorap-dashboard.appspot.com",
-  messagingSenderId: "109823456789",
-  appId: "1:109823456789:web:abcdef123456789"
+  apiKey: "AIzaSyB6Gtzfl1PPXJ2EPappAEXCyWmm3hC4Lfg",
+  authDomain: "festival-apr-dashboard.firebaseapp.com",
+  projectId: "festival-apr-dashboard",
+  storageBucket: "festival-apr-dashboard.firebasestorage.app",
+  messagingSenderId: "536120338256",
+  appId: "1:536120338256:web:68757b39ea456ffd1dae55",
+  measurementId: "G-KNFPGXEFPN"
 };
 
 // Permite persistir credenciais customizadas sem alterar código fonte
