@@ -10,10 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Source+Code+Pro:wght@500;700&display=swap" rel="stylesheet">
   
-  <link rel="icon" href="../fav.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" href="/fav.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin/admin.css">
 </head>
-<body>
+<body class="dark-mode admin-portal-body">
+  <div class="bg-layers">
+    <div class="bg-base"></div>
+  </div>
 
   <!-- =========================================================================
        TELA DE LOGIN (ESTILO STREET HIP HOP)
@@ -21,7 +25,7 @@
   <div id="login-screen" class="login-container" style="display: none;">
     <div class="login-card">
       <div class="login-brand">
-        <img src="../logo-dark.svg" alt="Festival Abreu pro Rap" class="login-logo" />
+        <img src="/logo-dark.svg" alt="Festival Abreu pro Rap" class="login-logo" />
         <span class="badge-tag-edition">PORTAL DE GESTÃO INTERNA</span>
       </div>
       
@@ -63,7 +67,7 @@
     <!-- SIDEBAR DE NAVEGAÇÃO -->
     <aside class="admin-sidebar" id="admin-sidebar">
       <div class="sidebar-header">
-        <img src="../logo-dark.svg" alt="Abreu pro Rap" class="sidebar-logo" />
+        <img src="/logo-dark.svg" alt="Abreu pro Rap" class="sidebar-logo" />
         <span class="badge-tag-edition">ADMIN</span>
       </div>
 
@@ -108,7 +112,7 @@
 
       <!-- RODAPÉ DA SIDEBAR -->
       <div class="sidebar-footer">
-        <a href="../" target="_blank" class="btn-sidebar-secondary">
+        <a href="/" target="_blank" class="btn-sidebar-secondary">
           <span>🌐</span> Ver Site Oficial
         </a>
         <button id="btn-logout" class="btn-sidebar-secondary">

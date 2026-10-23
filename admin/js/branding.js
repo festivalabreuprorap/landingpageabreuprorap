@@ -16,21 +16,21 @@ export const OFFICIAL_COLORS = [
 
 // Tipografias Oficiais
 export const OFFICIAL_FONTS = [
-  { name: 'Amsterdam Urban', file: '../amsterdam.ttf', format: 'TTF', type: 'Exibições & Cartazes', previewText: 'ABREU PRO RAP 2026' },
-  { name: 'CC Phat Boi Bold', file: '../ccphatboi-bold.ttf', format: 'TTF', type: 'Graffiti & Títulos Pesados', previewText: 'HIP HOP EM AÇÃO' },
-  { name: 'Rolinho Graffiti', file: '../rolinho.ttf', format: 'TTF', type: 'Texturas & Stencil Urbano', previewText: 'BATALHA DE RIMAS' },
+  { name: 'Amsterdam Urban', file: '/amsterdam.ttf', format: 'TTF', type: 'Exibições & Cartazes', previewText: 'ABREU PRO RAP 2026' },
+  { name: 'CC Phat Boi Bold', file: '/ccphatboi-bold.ttf', format: 'TTF', type: 'Graffiti & Títulos Pesados', previewText: 'HIP HOP EM AÇÃO' },
+  { name: 'Rolinho Graffiti', file: '/rolinho.ttf', format: 'TTF', type: 'Texturas & Stencil Urbano', previewText: 'BATALHA DE RIMAS' },
   { name: 'Bebas Neue', web: 'Google Fonts', format: 'WebFont', type: 'Subtítulos & Menus', previewText: 'FESTIVAL DA JUVENTUDE' },
   { name: 'Inter Display', web: 'Google Fonts', format: 'WebFont', type: 'Corpo de Texto & UI', previewText: 'Transformação social através da arte urbana' }
 ];
 
 // Logotipos Oficiais
 export const OFFICIAL_LOGOS = [
-  { name: 'Logotipo Dark Mode (Oficial)', file: '../logo-dark.svg', type: 'Vetor SVG', desc: 'Ideal para fundos escuros e telões de palco' },
-  { name: 'Logotipo Light Mode', file: '../logo-light.svg', type: 'Vetor SVG', desc: 'Ideal para fundos claros e impressos' },
-  { name: 'Símbolo & Favicon APR', file: '../fav.svg', type: 'Vetor SVG', desc: 'Ícone oficial para redes sociais e avatares' },
-  { name: 'Logo Mic Aberto', file: '../MIC ABERTO LOGO.png', type: 'Imagem PNG', desc: 'Identidade oficial do Palco Mic Aberto' },
-  { name: 'Brush Tag Spray', file: '../Brush tag spray.svg', type: 'Vetor SVG', desc: 'Pincelada de spray para composição visual' },
-  { name: 'Splater Tag Spray', file: '../Splater Tag Spray.svg', type: 'Vetor SVG', desc: 'Respingos urbanos para identidade cenográfica' }
+  { name: 'Logotipo Dark Mode (Oficial)', file: '/logo-dark.svg', type: 'Vetor SVG', desc: 'Ideal para fundos escuros e telões de palco' },
+  { name: 'Logotipo Light Mode', file: '/logo-light.svg', type: 'Vetor SVG', desc: 'Ideal para fundos claros e impressos' },
+  { name: 'Símbolo & Favicon APR', file: '/fav.svg', type: 'Vetor SVG', desc: 'Ícone oficial para redes sociais e avatares' },
+  { name: 'Logo Mic Aberto', file: '/MIC ABERTO LOGO.png', type: 'Imagem PNG', desc: 'Identidade oficial do Palco Mic Aberto' },
+  { name: 'Brush Tag Spray', file: '/Brush tag spray.svg', type: 'Vetor SVG', desc: 'Pincelada de spray para composição visual' },
+  { name: 'Splater Tag Spray', file: '/Splater Tag Spray.svg', type: 'Vetor SVG', desc: 'Respingos urbanos para identidade cenográfica' }
 ];
 
 export function initBranding() {
