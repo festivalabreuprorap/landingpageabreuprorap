@@ -39,7 +39,7 @@ export function saveFirebaseConfig(config) {
 
 // Configuração do Webhook da Google Sheets API para Looker Studio
 export function getSheetsWebhookUrl() {
-  return localStorage.getItem('apr_sheets_webhook_url') || '';
+  return localStorage.getItem('apr_sheets_webhook_url') || "https://script.google.com/macros/s/AKfycbw7bkGrG1DYf8cQ6-Z7TceAv7FAF3oJZ1VVcoKnaXGNVZYDe_-OclrbvdPabIzF6-bPWQ/exec";
 }
 
 export function saveSheetsWebhookUrl(url) {
