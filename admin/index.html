@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard de Gestão | Festival Abreu pro Rap 2026</title>
+  
+  <!-- Fontes Oficiais -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Source+Code+Pro:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="icon" href="../fav.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+  <!-- =========================================================================
+       TELA DE LOGIN (ESTILO STREET HIP HOP)
+       ========================================================================= -->
+  <div id="login-screen" class="login-container" style="display: none;">
+    <div class="login-card">
+      <div class="login-brand">
+        <img src="../logo-dark.svg" alt="Festival Abreu pro Rap" class="login-logo" />
+        <span class="badge-tag-edition">PORTAL DE GESTÃO INTERNA</span>
+      </div>
+      
+      <h2 class="login-title">Acesso Restrito</h2>
+      <p class="login-desc">Entre com as credenciais da equipe ou direção do festival.</p>
+
+      <form id="login-form" class="login-form">
+        <div class="form-group">
+          <label for="login-email">E-mail</label>
+          <input type="email" id="login-email" class="form-control" placeholder="abreuprorap@gmail.com" required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Senha de Acesso</label>
+          <input type="password" id="login-password" class="form-control" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+
+        <button type="submit" id="btn-submit-login" class="btn-primary" style="width: 100%; justify-content: center; padding: 12px; margin-top: 8px;">
+          Entrar na Plataforma
+        </button>
+
+        <div id="login-error" class="login-error-msg" style="display: none;"></div>
+
+        <div class="login-quick-demo">
+          <p class="text-xs text-muted">Conta Master: <strong class="text-gold">abreuprorap@gmail.com</strong></p>
+          <button type="button" id="btn-demo-mode" class="btn-secondary" style="width: 100%; font-size: 12px; padding: 6px;">
+            Acessar com Modo Demonstração Rápida
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       LAYOUT PRINCIPAL DO DASHBOARD
+       ========================================================================= -->
+  <div id="dashboard-app" class="dashboard-layout" style="display: flex;">
+
+    <!-- SIDEBAR DE NAVEGAÇÃO -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-header">
+        <img src="../logo-dark.svg" alt="Abreu pro Rap" class="sidebar-logo" />
+        <span class="badge-tag-edition">ADMIN</span>
+      </div>
+
+      <!-- CARD DO USUÁRIO LOGADO COM CARGO OBRIGATÓRIO -->
+      <div class="sidebar-user-card">
+        <div class="user-profile-row">
+          <div class="user-avatar-circle" id="user-avatar-initials">AP</div>
+          <div class="user-names-box">
+            <span class="user-name-title" id="user-display-name">Direção Geral</span>
+            <span class="user-role-badge role-direcao" id="user-role-badge">DIREÇÃO</span>
+          </div>
+        </div>
+        <!-- Cargo / Função (Editável pela Direção) -->
+        <div class="user-jobtitle-pill" id="user-job-title" title="Cargo Oficial na Produção">
+          💼 Diretor Geral do Festival
+        </div>
+      </div>
+
+      <!-- ITENS DE MENU (CONDICIONAIS POR PERMISSÃO) -->
+      <nav class="sidebar-nav">
+        <a class="nav-link active" data-tab="tab-suppliers" id="nav-suppliers">
+          <span class="nav-icon">💰</span>
+          <span>Fornecedores & Custos</span>
+        </a>
+
+        <a class="nav-link" data-tab="tab-branding" id="nav-branding">
+          <span class="nav-icon">🎨</span>
+          <span>Drive de Marca</span>
+        </a>
+
+        <!-- Módulo Exclusivo da Direção -->
+        <a class="nav-link" data-tab="tab-users" id="nav-users">
+          <span class="nav-icon">👥</span>
+          <span>Gestão de Equipe</span>
+        </a>
+
+        <a class="nav-link" data-tab="tab-settings" id="nav-settings">
+          <span class="nav-icon">⚙️</span>
+          <span>Google Sheets & Integrações</span>
+        </a>
+      </nav>
+
+      <!-- RODAPÉ DA SIDEBAR -->
+      <div class="sidebar-footer">
+        <a href="../" target="_blank" class="btn-sidebar-secondary">
+          <span>🌐</span> Ver Site Oficial
+        </a>
+        <button id="btn-logout" class="btn-sidebar-secondary">
+          <span>🚪</span> Encerrar Sessão
+        </button>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="admin-main">
+
+      <!-- =====================================================================
+           MÓDULO A: FORNECEDORES & CUSTOS (FINANCEIRO & LOOKER SYNC)
+           ===================================================================== -->
+      <section id="tab-suppliers" class="dashboard-tab-content">
+        <div class="top-bar-header">
+          <div class="page-title-box">
+            <h1>Gestão de Fornecedores & Orçamento</h1>
+            <p class="page-subtitle">Controle de contratos, pagamentos e sincronização para o Looker Studio.</p>
+          </div>
+          <div class="top-actions">
+            <button id="btn-sync-sheets" class="btn-sheets-sync" title="Atualizar dados no Google Sheets para o Looker Studio">
+              📊 Sincronizar Google Sheets
+            </button>
+            <button id="btn-new-supplier" class="btn-primary">
+              + Novo Fornecedor
+            </button>
+          </div>
+        </div>
+
+        <!-- CARDS DE MÉTRICAS / KPIS FINANCEIROS -->
+        <div class="kpi-grid">
+          <div class="kpi-card gold">
+            <div class="kpi-header">
+              <span>Total Contratado</span>
+              <span>💰</span>
+            </div>
+            <div class="kpi-value font-mono" id="kpi-total-contratado">R$ 0,00</div>
+            <span class="kpi-subtext">Valor total em contratos firmados</span>
+          </div>
+
+          <div class="kpi-card emerald">
+            <div class="kpi-header">
+              <span>Total Pago / Quitado</span>
+              <span>✅</span>
+            </div>
+            <div class="kpi-value font-mono" id="kpi-total-pago">R$ 0,00</div>
+            <span class="kpi-subtext">Compromissos já quitados</span>
+          </div>
+
+          <div class="kpi-card rose">
+            <div class="kpi-header">
+              <span>Saldo a Pagar</span>
+              <span>⏳</span>
+            </div>
+            <div class="kpi-value font-mono" id="kpi-total-pendente">R$ 0,00</div>
+            <span class="kpi-subtext">Valores pendentes e parciais</span>
+          </div>
+
+          <div class="kpi-card cyan">
+            <div class="kpi-header">
+              <span>Fornecedores</span>
+              <span>🏢</span>
+            </div>
+            <div class="kpi-value font-mono" id="kpi-total-fornecedores">0</div>
+            <span class="kpi-subtext">Prestadores e parceiros cadastrados</span>
+          </div>
+        </div>
+
+        <!-- TABELA DE FORNECEDORES COM FILTROS -->
+        <div class="content-box">
+          <div class="box-header-toolbar">
+            <div class="filter-group">
+              <input type="text" id="filter-supplier-search" class="input-search" placeholder="🔍 Buscar fornecedor ou contato..." style="min-width: 250px;" />
+              
+              <select id="filter-supplier-status" class="select-custom">
+                <option value="all">Todos os Status</option>
+                <option value="Pendente">Pendente</option>
+                <option value="Parcial">Parcial</option>
+                <option value="Quitado">Quitado</option>
+              </select>
+
+              <select id="filter-supplier-category" class="select-custom">
+                <option value="all">Todas as Categorias</option>
+                <option value="Estrutura/Palco">Estrutura/Palco</option>
+                <option value="Som & Iluminação">Som & Iluminação</option>
+                <option value="Artistas/Cachê">Artistas/Cachê</option>
+                <option value="Segurança">Segurança</option>
+                <option value="Alimentação">Alimentação</option>
+                <option value="Comunicação">Comunicação</option>
+                <option value="Cenografia">Cenografia</option>
+                <option value="Transporte">Transporte</option>
+                <option value="Outros">Outros</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Fornecedor / Razão Social</th>
+                  <th>Categoria</th>
+                  <th>Valor Contratado</th>
+                  <th>Status</th>
+                  <th>Vencimento</th>
+                  <th>Observações</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="suppliers-tbody">
+                <!-- Renderizado dinamicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =====================================================================
+           MÓDULO B: GESTÃO DE BRANDING & IDENTIDADE VISUAL (DRIVE DE MARCA)
+           ===================================================================== -->
+      <section id="tab-branding" class="dashboard-tab-content" style="display: none;">
+        <div class="top-bar-header">
+          <div class="page-title-box">
+            <h1>Drive de Marca & Identidade Visual</h1>
+            <p class="page-subtitle">Materiais oficiais, paleta de cores, tipografias e logotipos do Festival Abreu pro Rap.</p>
+          </div>
+        </div>
+
+        <!-- Paleta de Cores Oficial -->
+        <div class="content-box" style="margin-bottom: 24px;">
+          <div class="box-header-toolbar">
+            <h3>🎨 Paleta de Cores Oficial (Clique para Copiar)</h3>
+          </div>
+          <div class="branding-grid-colors" id="palette-container">
+            <!-- Injetado dinamicamente -->
+          </div>
+        </div>
+
+        <!-- Logotipos Oficiais -->
+        <div class="content-box" style="margin-bottom: 24px;">
+          <div class="box-header-toolbar">
+            <h3>📂 Logotipos e Elementos Vetoriais</h3>
+          </div>
+          <div class="logos-grid" id="logos-container">
+            <!-- Injetado dinamicamente -->
+          </div>
+        </div>
+
+        <!-- Tipografias -->
+        <div class="content-box">
+          <div class="box-header-toolbar">
+            <h3>🔤 Fontes e Tipografia Oficial</h3>
+          </div>
+          <div class="fonts-list-box" id="fonts-container">
+            <!-- Injetado dinamicamente -->
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =====================================================================
+           MÓDULO C: GERENCIAMENTO DE USUÁRIOS & PERMISSÕES (DIREÇÃO)
+           ===================================================================== -->
+      <section id="tab-users" class="dashboard-tab-content" style="display: none;">
+        <div class="top-bar-header">
+          <div class="page-title-box">
+            <h1>Gerenciamento de Equipe & Permissões (RBAC)</h1>
+            <p class="page-subtitle">Painel exclusivo da Direção para cadastrar membros, atribuir Cargos e definir acessos.</p>
+          </div>
+          <div class="top-actions">
+            <button id="btn-new-user" class="btn-primary">
+              + Convidar / Novo Usuário
+            </button>
+          </div>
+        </div>
+
+        <div class="content-box">
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Membro da Equipe</th>
+                  <th>Cargo / Função</th>
+                  <th>Nível de Acesso</th>
+                  <th>Módulos Autorizados</th>
+                  <th>Criado Em</th>
+                  <th style="text-align: right;">Ações</th>
+                </tr>
+              </thead>
+              <tbody id="users-tbody">
+                <!-- Renderizado dinamicamente -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- =====================================================================
+           MÓDULO CONFIGURAÇÕES & GOOGLE SHEETS CONNECTOR
+           ===================================================================== -->
+      <section id="tab-settings" class="dashboard-tab-content" style="display: none;">
+        <div class="top-bar-header">
+          <div class="page-title-box">
+            <h1>Configurações & Conexões Externas</h1>
+            <p class="page-subtitle">Integração com Google Sheets (Looker Studio) e parâmetros do Firebase.</p>
+          </div>
+        </div>
+
+        <div class="content-box" style="padding: 24px; max-width: 800px;">
+          <h3 style="margin-bottom: 8px;">📊 Conexão com Google Sheets (Looker Studio)</h3>
+          <p class="text-muted text-xs" style="margin-bottom: 16px;">
+            Insira a URL do Web App gerada no Google Apps Script da conta <strong>abreuprorap@gmail.com</strong> para sincronizar os dados financeiros em tempo real.
+          </p>
+
+          <div class="form-group" style="margin-bottom: 16px;">
+            <label for="settings-sheets-url">URL do Web App do Google Apps Script</label>
+            <input type="url" id="settings-sheets-url" class="form-control" placeholder="https://script.google.com/macros/s/.../exec" />
+          </div>
+
+          <button type="button" id="btn-save-sheets-config" class="btn-primary">
+            Salvar Conexão do Google Sheets
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: CADASTRAR / EDITAR FORNECEDOR
+       ========================================================================= -->
+  <div id="modal-supplier" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="modal-supplier-title">Cadastrar Fornecedor</h3>
+        <button class="modal-close" onclick="window.closeSupplierModal()">&times;</button>
+      </div>
+
+      <form id="form-supplier" class="modal-form">
+        <input type="hidden" id="supplier-id" />
+
+        <div class="form-group">
+          <label for="supplier-name">Nome do Fornecedor / Razão Social *</label>
+          <input type="text" id="supplier-name" class="form-control" required placeholder="Ex: Mega Palcos & Iluminação LTDA" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="supplier-category">Categoria *</label>
+            <select id="supplier-category" class="form-control" required>
+              <option value="Estrutura/Palco">Estrutura / Palco</option>
+              <option value="Som & Iluminação">Som & Iluminação</option>
+              <option value="Artistas/Cachê">Artistas / Cachê</option>
+              <option value="Segurança">Segurança</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Comunicação">Comunicação</option>
+              <option value="Cenografia">Cenografia</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="supplier-amount">Valor Contratado (R$) *</label>
+            <input type="number" step="0.01" min="0" id="supplier-amount" class="form-control font-mono" required placeholder="0.00" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="supplier-contact">Pessoa de Contato</label>
+            <input type="text" id="supplier-contact" class="form-control" placeholder="Ex: Carlos Eduardo" />
+          </div>
+
+          <div class="form-group">
+            <label for="supplier-phone">Telefone / WhatsApp</label>
+            <input type="tel" id="supplier-phone" class="form-control font-mono" placeholder="(81) 99999-9999" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="supplier-status">Status de Pagamento *</label>
+            <select id="supplier-status" class="form-control" required>
+              <option value="Pendente">Pendente</option>
+              <option value="Parcial">Parcial</option>
+              <option value="Quitado">Quitado</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="supplier-due-date">Data de Vencimento *</label>
+            <input type="date" id="supplier-due-date" class="form-control font-mono" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-paid-date">Data de Pagamento Realizado (se aplicável)</label>
+          <input type="date" id="supplier-paid-date" class="form-control font-mono" />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-file">Link do Contrato / Comprovante (Drive ou Storage)</label>
+          <input type="url" id="supplier-file" class="form-control font-mono" placeholder="https://drive.google.com/..." />
+        </div>
+
+        <div class="form-group">
+          <label for="supplier-notes">Observações do Contrato / Escopo</label>
+          <textarea id="supplier-notes" class="form-control" rows="3" placeholder="Detalhes do equipamento, horário de montagem, exigências técnicas..."></textarea>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="window.closeSupplierModal()">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Fornecedor</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: CADASTRAR / EDITAR USUÁRIO (DIREÇÃO)
+       ========================================================================= -->
+  <div id="modal-user" class="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3 id="modal-user-title">Cadastrar Novo Membro</h3>
+        <button class="modal-close" onclick="window.closeUserModal()">&times;</button>
+      </div>
+
+      <form id="form-user" class="modal-form">
+        <input type="hidden" id="user-uid" />
+
+        <div class="form-group">
+          <label for="user-form-name">Nome Completo *</label>
+          <input type="text" id="user-form-name" class="form-control" required placeholder="Ex: Roberto Silva" />
+        </div>
+
+        <div class="form-group">
+          <label for="user-form-email">E-mail de Acesso *</label>
+          <input type="email" id="user-form-email" class="form-control" required placeholder="usuario@festivalapr.com.br" />
+        </div>
+
+        <!-- Campo Obrigatório de Cargo/Função -->
+        <div class="form-group">
+          <label for="user-form-job">Cargo / Função na Produção *</label>
+          <input type="text" id="user-form-job" class="form-control" required placeholder="Ex: Coordenador de Infraestrutura e Palco" list="job-suggestions" />
+          <datalist id="job-suggestions">
+            <option value="Diretor Geral" />
+            <option value="Diretor Financeiro" />
+            <option value="Coordenador de Palco & Som" />
+            <option value="Produtor Executivo" />
+            <option value="Gestor de Comunicação & Mídia" />
+            <option value="Coordenador de Segurança" />
+            <option value="Curador Artístico & Batalha" />
+          </datalist>
+        </div>
+
+        <div class="form-group">
+          <label for="user-form-role">Nível de Acesso (RBAC) *</label>
+          <select id="user-form-role" class="form-control" required>
+            <option value="gestor">Equipe / Gestor (Acesso Customizado aos Módulos)</option>
+            <option value="direcao">Direção (Admin Master com Controle Total)</option>
+          </select>
+        </div>
+
+        <!-- Permissões Modulares -->
+        <div class="form-group">
+          <label>Módulos Autorizados para Visualização/Edição</label>
+          <div class="checkbox-group">
+            <label class="checkbox-item">
+              <input type="checkbox" id="perm-fornecedores" checked />
+              <span>💰 Módulo de Fornecedores & Custos (Orçamento)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="perm-branding" checked />
+              <span>🎨 Módulo de Branding & Drive de Marca</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="perm-admin" />
+              <span>⚡ Gerenciamento de Equipe e Permissões (Admin)</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="window.closeUserModal()">Cancelar</button>
+          <button type="submit" class="btn-primary">Salvar Membro</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT BOOTSTRAPPER COM FIREBASE SDK 10 MODULAR -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, doc, getDoc, setDoc, addDoc, deleteDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    import { getFirebaseConfig, getSheetsWebhookUrl, saveSheetsWebhookUrl } from "./js/firebase-config.js";
+    import { setupAuth, getCurrentUser, getCurrentUserProfile, isDirecao, hasPermission } from "./js/auth.js";
+    import { initSuppliers, saveSupplier, deleteSupplier, getSupplierById, updateFinancialKPIs, renderSuppliers } from "./js/suppliers.js";
+    import { initBranding, copyToClipboard } from "./js/branding.js";
+    import { initUsers, saveUser, getUserById, renderUsers } from "./js/users.js";
+    import { syncSupplierToSheets, syncAllSuppliersToSheets } from "./js/sheets-sync.js";
+
+    // Inicialização do Firebase
+    const firebaseConfig = getFirebaseConfig();
+    let app, auth, db;
+
+    try {
+      app = initializeApp(firebaseConfig);
+      auth = getAuth(app);
+      db = getFirestore(app);
+    } catch (e) {
+      console.warn("Inicializando em modo sandbox/offline:", e);
+    }
+
+    // Exportações globais para os modais e botões inline
+    window.copyColor = copyToClipboard;
+    window.closeSupplierModal = () => document.getElementById('modal-supplier').classList.remove('active');
+    window.closeUserModal = () => document.getElementById('modal-user').classList.remove('active');
+
+    // Inicialização da Autenticação
+    if (auth && db) {
+      setupAuth({ auth, db, doc, getDoc, setDoc, onAuthStateChanged }, (isLoggedIn, profile) => {
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardApp = document.getElementById('dashboard-app');
+
+        if (isLoggedIn) {
+          loginScreen.style.display = 'none';
+          dashboardApp.style.display = 'flex';
+
+          initSuppliers(db, { collection, onSnapshot, query, orderBy, doc, setDoc, addDoc, deleteDoc });
+          initBranding();
+          initUsers(db, { collection, onSnapshot, query, orderBy, doc, setDoc, deleteDoc });
+        } else {
+          loginScreen.style.display = 'flex';
+          dashboardApp.style.display = 'none';
+        }
+      });
+    }
+
+    // Modo Demonstração Rápida
+    document.getElementById('btn-demo-mode')?.addEventListener('click', () => {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard-app').style.display = 'flex';
+      
+      initSuppliers(db || {}, {
+        collection: () => {},
+        onSnapshot: (q, cb) => cb({ forEach: () => {} }),
+        query: () => {},
+        orderBy: () => {},
+        doc: () => {},
+        setDoc: async () => {},
+        addDoc: async () => ({ id: 'sup-' + Date.now() }),
+        deleteDoc: async () => {}
+      });
+      initBranding();
+      initUsers(db || {}, {
+        collection: () => {},
+        onSnapshot: (q, cb) => cb({ forEach: () => {} }),
+        query: () => {},
+        orderBy: () => {},
+        doc: () => {},
+        setDoc: async () => {},
+        deleteDoc: async () => {}
+      });
+    });
+
+    // Submissão de Login
+    document.getElementById('login-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      const errBox = document.getElementById('login-error');
+
+      try {
+        errBox.style.display = 'none';
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        errBox.textContent = 'Erro ao autenticar: Verifique seu e-mail e senha.';
+        errBox.style.display = 'block';
+      }
+    });
+
+    // Logout
+    document.getElementById('btn-logout')?.addEventListener('click', async () => {
+      if (auth) await signOut(auth);
+      window.location.reload();
+    });
+
+    // Navegação de Abas
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        const targetTab = link.getAttribute('data-tab');
+        document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+        document.querySelectorAll('.dashboard-tab-content').forEach(t => t.style.display = 'none');
+
+        link.classList.add('active');
+        const tabEl = document.getElementById(targetTab);
+        if (tabEl) tabEl.style.display = 'block';
+      });
+    });
+
+    // Modal Fornecedor: Abrir para Novo
+    document.getElementById('btn-new-supplier')?.addEventListener('click', () => {
+      document.getElementById('form-supplier').reset();
+      document.getElementById('supplier-id').value = '';
+      document.getElementById('modal-supplier-title').textContent = 'Cadastrar Novo Fornecedor';
+      document.getElementById('modal-supplier').classList.add('active');
+    });
+
+    // Modal Fornecedor: Abrir para Edição
+    window.editSupplier = (id) => {
+      const item = getSupplierById(id);
+      if (!item) return;
+
+      document.getElementById('supplier-id').value = item.id;
+      document.getElementById('supplier-name').value = item.name || '';
+      document.getElementById('supplier-category').value = item.category || 'Outros';
+      document.getElementById('supplier-amount').value = item.amount || '';
+      document.getElementById('supplier-contact').value = item.contactName || '';
+      document.getElementById('supplier-phone').value = item.phone || '';
+      document.getElementById('supplier-status').value = item.paymentStatus || 'Pendente';
+      document.getElementById('supplier-due-date').value = item.dueDate || '';
+      document.getElementById('supplier-paid-date').value = item.paidDate || '';
+      document.getElementById('supplier-file').value = item.fileUrl || '';
+      document.getElementById('supplier-notes').value = item.notes || '';
+
+      document.getElementById('modal-supplier-title').textContent = 'Editar Lançamento de Fornecedor';
+      document.getElementById('modal-supplier').classList.add('active');
+    };
+
+    window.deleteSupplier = deleteSupplier;
+
+    // Submissão do Formulário de Fornecedor
+    document.getElementById('form-supplier')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        id: document.getElementById('supplier-id').value,
+        name: document.getElementById('supplier-name').value,
+        category: document.getElementById('supplier-category').value,
+        amount: document.getElementById('supplier-amount').value,
+        contactName: document.getElementById('supplier-contact').value,
+        phone: document.getElementById('supplier-phone').value,
+        paymentStatus: document.getElementById('supplier-status').value,
+        dueDate: document.getElementById('supplier-due-date').value,
+        paidDate: document.getElementById('supplier-paid-date').value,
+        fileUrl: document.getElementById('supplier-file').value,
+        notes: document.getElementById('supplier-notes').value
+      };
+
+      try {
+        await saveSupplier(formData);
+        window.closeSupplierModal();
+      } catch (err) {
+        alert('Erro ao salvar fornecedor: ' + err.message);
+      }
+    });
+
+    // Filtros de Fornecedor
+    ['filter-supplier-search', 'filter-supplier-status', 'filter-supplier-category'].forEach(id => {
+      document.getElementById(id)?.addEventListener('input', renderSuppliers);
+      document.getElementById(id)?.addEventListener('change', renderSuppliers);
+    });
+
+    // Sincronização Manual com Google Sheets
+    document.getElementById('btn-sync-sheets')?.addEventListener('click', async () => {
+      const btn = document.getElementById('btn-sync-sheets');
+      btn.textContent = '⏳ Sincronizando...';
+      btn.disabled = true;
+
+      const res = await syncAllSuppliersToSheets(getSupplierById ? [] : []);
+      btn.textContent = '📊 Sincronizar Google Sheets';
+      btn.disabled = false;
+
+      if (res.reason === 'no_url') {
+        alert('Configure a URL do Web App do Google Sheets na aba "Google Sheets & Integrações" para sincronizar com o Looker Studio.');
+      } else {
+        alert('Sincronização concluída com sucesso!');
+      }
+    });
+
+    // Modal Usuário (Direção)
+    document.getElementById('btn-new-user')?.addEventListener('click', () => {
+      document.getElementById('form-user').reset();
+      document.getElementById('user-uid').value = '';
+      document.getElementById('modal-user-title').textContent = 'Convidar / Novo Membro';
+      document.getElementById('modal-user').classList.add('active');
+    });
+
+    window.editUser = (uid) => {
+      const u = getUserById(uid);
+      if (!u) return;
+
+      document.getElementById('user-uid').value = u.uid;
+      document.getElementById('user-form-name').value = u.name || '';
+      document.getElementById('user-form-email').value = u.email || '';
+      document.getElementById('user-form-job').value = u.jobTitle || '';
+      document.getElementById('user-form-role').value = u.role || 'gestor';
+      document.getElementById('perm-fornecedores').checked = !!u.permissions?.fornecedores;
+      document.getElementById('perm-branding').checked = !!u.permissions?.branding;
+      document.getElementById('perm-admin').checked = !!u.permissions?.admin;
+
+      document.getElementById('modal-user-title').textContent = 'Editar Membro & Cargo';
+      document.getElementById('modal-user').classList.add('active');
+    };
+
+    document.getElementById('form-user')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const userData = {
+        uid: document.getElementById('user-uid').value,
+        name: document.getElementById('user-form-name').value,
+        email: document.getElementById('user-form-email').value,
+        jobTitle: document.getElementById('user-form-job').value,
+        role: document.getElementById('user-form-role').value,
+        permissions: {
+          fornecedores: document.getElementById('perm-fornecedores').checked,
+          branding: document.getElementById('perm-branding').checked,
+          admin: document.getElementById('perm-admin').checked
+        }
+      };
+
+      try {
+        await saveUser(userData);
+        window.closeUserModal();
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // Configuração do Google Sheets Webhook URL
+    const sheetsInput = document.getElementById('settings-sheets-url');
+    if (sheetsInput) sheetsInput.value = getSheetsWebhookUrl();
+
+    document.getElementById('btn-save-sheets-config')?.addEventListener('click', () => {
+      const val = document.getElementById('settings-sheets-url').value;
+      saveSheetsWebhookUrl(val);
+      alert('Configuração do Google Sheets salva com sucesso!');
+    });
+  </script>
+</body>
+</html>

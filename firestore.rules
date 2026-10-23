@@ -1,0 +1,78 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ===============================================================
+    // FUNÇÕES AUXILIARES DE CONTROLE DE ACESSO (RBAC)
+    // ===============================================================
+    
+    // Verifica se o usuário está autenticado
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    // Obtém o documento de perfil do usuário atual
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+    
+    // Verifica se o usuário é da Direção (Admin Master)
+    function isDirecao() {
+      return isSignedIn() && (
+        getUserData().role == 'direcao' || 
+        request.auth.token.email == 'abreuprorap@gmail.com'
+      );
+    }
+    
+    // Verifica se o usuário tem permissão para um módulo específico
+    function hasPermission(moduleName) {
+      return isSignedIn() && (
+        isDirecao() || 
+        (getUserData().permissions != null && getUserData().permissions[moduleName] == true)
+      );
+    }
+    
+    // ===============================================================
+    // COLEÇÃO: USERS (Controle de Usuários e Perfis)
+    // ===============================================================
+    match /users/{userId} {
+      // O próprio usuário pode ler seu documento para verificar suas permissões;
+      // Membros da Direção podem ler e listar todos os usuários.
+      allow read: if isSignedIn() && (request.auth.uid == userId || isDirecao());
+      
+      // Apenas a Direção pode cadastrar, alterar cargos/permissões ou excluir usuários.
+      // Usuário mestre inicial (abreuprorap@gmail.com) tem permissão de auto-bootstrap.
+      allow create: if isDirecao() || (isSignedIn() && request.auth.uid == userId && request.auth.token.email == 'abreuprorap@gmail.com');
+      allow update, delete: if isDirecao();
+    }
+    
+    // ===============================================================
+    // COLEÇÃO: SUPPLIERS (Fornecedores e Custos Financeiros)
+    // ===============================================================
+    match /suppliers/{supplierId} {
+      // Leitura permitida para quem tem permissão no módulo de fornecedores
+      allow read: if hasPermission('fornecedores');
+      
+      // Criação, edição e exclusão de fornecedores
+      allow create: if hasPermission('fornecedores') && 
+                      request.resource.data.name is string &&
+                      request.resource.data.amount is number;
+                      
+      allow update: if hasPermission('fornecedores');
+      allow delete: if isDirecao(); // Exclusão de lançamentos restrita à Direção para auditoria
+    }
+    
+    // ===============================================================
+    // COLEÇÃO: BRANDING_ASSETS (Drive de Marca e Ativos Visuais)
+    // ===============================================================
+    match /branding_assets/{assetId} {
+      // Visualização de arquivos e guias de marca
+      allow read: if hasPermission('branding');
+      
+      // Upload e gestão de materiais oficiais
+      allow create, update: if hasPermission('branding');
+      allow delete: if isDirecao();
+    }
+  }
+}
