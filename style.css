@@ -762,7 +762,8 @@ header.scrolled {
     margin: 0 auto;
 }
 
-.organizers-grid {
+.organizers-grid,
+.ambassadors-grid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
@@ -1711,3 +1712,12 @@ header.scrolled {
     }
 }
 
+
+
+/* Estilo específico para placeholder dos Embaixadores */
+.ambassador-placeholder-img {
+    padding: 24px;
+    object-fit: contain !important;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 15px rgba(250, 255, 0, 0.3)) !important;
+}
