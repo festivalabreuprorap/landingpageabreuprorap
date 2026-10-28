@@ -1817,18 +1817,17 @@ header.scrolled {
 
 /* Expanded Player Card */
 .spotify-card {
-    width: 352px;
+    width: 624px;
     max-width: calc(100vw - 32px);
-    background: rgba(18, 18, 18, 0.96);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    padding: 14px 14px 12px;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.7), 0 0 35px rgba(29, 185, 84, 0.2);
+    background: transparent;
+    border-radius: 12px;
+    padding: 0;
+    border: none;
+    position: relative;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 30px rgba(29, 185, 84, 0.2);
     display: none;
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(20px) scale(0.96);
     transform-origin: bottom right;
     transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -1839,54 +1838,33 @@ header.scrolled {
     transform: translateY(0) scale(1);
 }
 
-.spotify-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 4px 10px 4px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 10px;
-}
-
-.spotify-header-title {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.8px;
-    color: #ffffff;
-    text-transform: uppercase;
-}
-
 .spotify-close-btn {
-    background: rgba(255, 255, 255, 0.08);
-    border: none;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #121212;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #bbb;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    z-index: 20;
     transition: all 0.2s ease;
 }
 
 .spotify-close-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    transform: rotate(90deg);
+    background: #1DB954;
+    border-color: #1DB954;
+    color: #000000;
+    transform: scale(1.12);
 }
 
-.spotify-iframe-container {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #000;
-}
-
-.spotify-iframe-container iframe {
+.spotify-card iframe {
     display: block;
     width: 100%;
 }
