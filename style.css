@@ -1555,6 +1555,10 @@ header.scrolled {
     width: 82%;
 }
 
+.artist-name-svg.artist-name-relikia {
+    width: 86%;
+}
+
 .artist-card-inner:hover .artist-name-svg {
     transform: scale(1.06);
 }
