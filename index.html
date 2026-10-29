@@ -449,17 +449,17 @@
                             </div>
                         </div>
 
-                        <!-- Embaixador 4 -->
+                        <!-- Embaixador 4: Laura -->
                         <div class="crew-card small">
                             <div class="crew-img">
-                                <img src="fav.svg" alt="Embaixador 4" class="ambassador-placeholder-img">
+                                <img src="Laura.png" alt="Laura - Embaixadora Festival Abreu pro Rap" loading="lazy">
                             </div>
                             <div class="crew-info">
-                                <h4 class="crew-name">Nome do Embaixador</h4>
-                                <p class="crew-bio">Voz e representatividade da cultura urbana no festival.</p>
-                                <a href="https://www.instagram.com/" target="_blank" class="crew-social">
+                                <h4 class="crew-name">Laura</h4>
+                                <p class="crew-bio">Oii, eu sou Laura Lins! Tenho 15 anos, amo moda, gosto de me arrumar e adoro tudo que tem a ver comigo e com meu estilo. Sou bem ligada em música, principalmente trap e rap. Também sou CEO da My Closet Store, que é uma parte muito especial de mim e tem tudo a ver com o que eu gosto.</p>
+                                <a href="https://www.instagram.com/lauralins.a" target="_blank" rel="noopener noreferrer" class="crew-social" aria-label="Perfil de Laura no Instagram (@lauralins.a)" title="Ver Instagram de Laura">
                                     <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 5px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                                    @instagram
+                                    @lauralins.a
                                 </a>
                             </div>
                         </div>
@@ -855,33 +855,18 @@
         // Init Theme
         setTheme(localStorage.getItem('theme') === 'light');
 
-        // Spotify Floating Widget Toggle
-        const spotifyWidget = document.getElementById('spotify-widget');
-        const spotifyTriggerBtn = document.getElementById('spotify-trigger-btn');
-        const spotifyMinimizeBtn = document.getElementById('spotify-minimize-btn');
-
-        if (spotifyTriggerBtn && spotifyWidget) {
-            spotifyTriggerBtn.addEventListener('click', () => {
-                spotifyWidget.classList.add('is-open');
-            });
-        }
-
-        if (spotifyMinimizeBtn && spotifyWidget) {
-            spotifyMinimizeBtn.addEventListener('click', () => {
-                spotifyWidget.classList.remove('is-open');
-            });
-        }
     </script>
 
     <!-- Spotify Floating Player Widget -->
     <div id="spotify-widget" class="spotify-floating-widget is-open" aria-label="Player Spotify">
         <!-- Expanded Card -->
         <div id="spotify-card" class="spotify-card">
-            <button type="button" id="spotify-minimize-btn" class="spotify-close-btn" aria-label="Minimizar player" title="Minimizar player">
-                <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <button type="button" id="spotify-minimize-btn" class="spotify-close-btn" aria-label="Minimizar playlist" title="Minimizar playlist">
+                <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
                     <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
+                <span>Minimizar</span>
             </button>
             <iframe data-testid="embed-iframe" style="border-radius:12px; display: block;" src="https://open.spotify.com/embed/playlist/6oI3a80NhyOIy9JF09Rdhf?utm_source=generator&si=184161a74e974c11" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
@@ -901,5 +886,38 @@
             </div>
         </button>
     </div>
+
+    <script>
+        // Spotify Floating Widget Dynamic Toggle
+        (function() {
+            function setupSpotifyWidget() {
+                var widget = document.getElementById('spotify-widget');
+                var triggerBtn = document.getElementById('spotify-trigger-btn');
+                var minimizeBtn = document.getElementById('spotify-minimize-btn');
+
+                if (!widget) return;
+
+                if (triggerBtn) {
+                    triggerBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        widget.classList.add('is-open');
+                    });
+                }
+
+                if (minimizeBtn) {
+                    minimizeBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        widget.classList.remove('is-open');
+                    });
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', setupSpotifyWidget);
+            } else {
+                setupSpotifyWidget();
+            }
+        })();
+    </script>
 </body>
 </html>
